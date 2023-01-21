@@ -1,13 +1,19 @@
 import { API_URL } from "./var.js";
 import { addPreload, removePreload } from "./loader.js";
 import { addDisaabled, removeDisaabled } from "./util.js/disableElem.js";
-import { getData } from "./util.js/api.js";
+import { getData, postData } from "./util.js/api.js";
 import { renderElements } from "./util.js/renderElements.js";
 
 export const initReserve = () => {
   const reserveForm = document.querySelector(".reserve__form");
-  const { fieldsetmonth, fieldspec, fieldsetdate, fieldsettime, btn } =
-    reserveForm;
+  const {
+    fieldservice,
+    fieldsetmonth,
+    fieldspec,
+    fieldsetdate,
+    fieldsettime,
+    btn,
+  } = reserveForm;
 
   addDisaabled([fieldsetmonth, fieldspec, fieldsetdate, fieldsettime, btn]);
 
@@ -59,7 +65,7 @@ export const initReserve = () => {
         fieldsetdate,
         data,
         "day",
-        reserveForm.spec.value
+        reserveForm.month.value
       );
       removePreload(fieldsetdate);
       removeDisaabled([fieldsetdate]);
@@ -84,5 +90,32 @@ export const initReserve = () => {
     if (target.name === "time") {
       removeDisaabled([btn]);
     }
+  });
+
+  reserveForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(reserveForm);
+    const json = JSON.stringify(Object.fromEntries(formData));
+    const res = await postData(`${API_URL}api/order`, json);
+
+    addDisaabled([
+      fieldservice,
+      fieldsetmonth,
+      fieldspec,
+      fieldsetdate,
+      fieldsettime,
+      btn,
+    ]);
+
+    const order = document.createElement("p");
+    order.textContent = `Спасибо за бронь #${res.id}. 
+    Ждем вас ${new Intl.DateTimeFormat("ru-RU", {
+      month: "long",
+      day: "numeric",
+    }).format(new Date(`${res.month}/${res.day}`))},
+        время: ${res.time}`;
+
+    reserveForm.append(order);
   });
 };

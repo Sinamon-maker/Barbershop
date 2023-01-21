@@ -34,6 +34,7 @@ export const innerTextToRender = (type, text) => {
                   >`;
   }
   if (type === "day") {
+    console.log("day", text.month, text.day);
     return `<input class="radio__input" name="day" type="radio" value = ${
       text.day
     } />
@@ -43,7 +44,7 @@ export const innerTextToRender = (type, text) => {
                     >${new Intl.DateTimeFormat("ru-RU", {
                       month: "long",
                       day: "numeric",
-                    }).format(new Date(text.month / text.day))}</span
+                    }).format(new Date(`${text.month} / ${text.day}`))}</span
                   >`;
   }
 
