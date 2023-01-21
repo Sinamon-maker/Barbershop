@@ -1,0 +1,51 @@
+@font-face {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  src: local(""),
+    url("../fonts/raleway-v28-latin-regular.woff2") format("woff2"),
+    /* Chrome 26+, Opera 23+, Firefox 39+ */
+      url("../fonts/raleway-v28-latin-regular.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+::after,
+::before {
+  box-sizing: inherit;
+}
+
+body {
+  min-width: 320px;
+  background-color: #241d1c;
+  color: #f6f3e3;
+  font-family: "Raleway", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.2; /* element not from body size*/
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.visually-hidden {
+  position: fixed;
+  transform: scale(0);
+}
+
+.container {
+  max-width: 1312px;
+  padding: 0 48px;
+  margin: 0 auto;
+}
+
+@media (max-width: 540px) {
+  .container {
+    padding: 0 24px;
+  }
+}

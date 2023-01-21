@@ -1,0 +1,51 @@
+.about {
+  padding: 62px 0;
+}
+
+.about__title {
+  font-weight: 400;
+  font-size: 40px;
+  text-transform: uppercase;
+  max-width: 700px;
+  margin: 0 0 24px;
+}
+.about__description {
+  line-height: 1.5;
+  max-width: 700px;
+  margin: 0 0 72px;
+}
+.about__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 384px);
+  gap: 24px 32px;
+}
+.about__item {
+  padding: 6px 6px 6px 96px;
+  background-position: left;
+  background-size: 80px;
+  background-repeat: no-repeat;
+}
+.about__item-top {
+  background-image: url("../images/top.svg");
+}
+.about__item-master {
+  background-image: url("../images/master.svg");
+}
+
+.about__item-garanty {
+  background-image: url("../images/garanty.svg");
+}
+.about__item-title {
+  margin: 0;
+  font-weight: 400;
+  font-size: 22px;
+  text-transform: uppercase;
+  color: #f6f3e3;
+}
+
+.about__item-description {
+  line-height: 1.3;
+}
