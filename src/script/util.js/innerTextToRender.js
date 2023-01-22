@@ -23,7 +23,7 @@ export const innerTextToRender = (type, text) => {
   }
 
   if (type === "month") {
-    console.log({ text });
+    
     return `<input class="radio__input" name="month" type="radio" value = ${text} />
                   <span
                     class="radio__label"
@@ -34,7 +34,7 @@ export const innerTextToRender = (type, text) => {
                   >`;
   }
   if (type === "day") {
-    console.log("day", text.month, text.day);
+    
     return `<input class="radio__input" name="day" type="radio" value = ${
       text.day
     } />
