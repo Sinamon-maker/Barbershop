@@ -1,4 +1,5 @@
 import { API_URL } from "../var.js";
+import { formatDate } from "./date.js";
 
 export const innerTextToRender = (type, text) => {
   if (type === "price") {
@@ -23,37 +24,55 @@ export const innerTextToRender = (type, text) => {
   }
 
   if (type === "month") {
-    
+    const date = formatDate(2023, text, {
+      month: "long",
+    });
+
     return `<input class="radio__input" name="month" type="radio" value = ${text} />
                   <span
                     class="radio__label"
                     
-                    >${new Intl.DateTimeFormat("ru-RU", {
-                      month: "long",
-                    }).format(new Date(text))}</span
+                    >${date}</span
                   >`;
   }
   if (type === "day") {
-    
-    return `<input class="radio__input" name="day" type="radio" value = ${
+    const date = formatDate(
+      2023,
+      text.month,
+      {
+        month: "long",
+        day: "numeric",
+      },
       text.day
-    } />
+    );
+    return `<input class="radio__input" name="day" type="radio" value = ${text.day} />
                   <span
                     class="radio__label"
                     
-                    >${new Intl.DateTimeFormat("ru-RU", {
-                      month: "long",
-                      day: "numeric",
-                    }).format(new Date(`${text.month} / ${text.day}`))}</span
+                    >${date}</span
                   >`;
   }
 
-  if ((type = "time")) {
+  if (type === "time") {
     return `<input class="radio__input" name="time" type="radio" value = ${text} />
                   <span
                     class="radio__label"
                     
                     >${text}</span
                   >`;
+  }
+  if (type === "order") {
+    const date = formatDate(
+      2023,
+      text.month,
+      {
+        month: "long",
+        day: "numeric",
+      },
+      text.day
+    );
+    return `Спасибо за бронь #${text.id}. 
+    Ждем вас ${date},
+        время: ${text.time}`;
   }
 };

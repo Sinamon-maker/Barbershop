@@ -23,3 +23,12 @@ export const renderElements = (
   });
   wrapper.append(...elements);
 };
+
+export const renderElement = (wrapper, type, res) => {
+  const order = document.createElement("p");
+
+  const text = innerTextToRender(type, res);
+  order.textContent = `${text}`;
+
+  wrapper.append(order);
+};

@@ -1,8 +1,8 @@
 import { API_URL } from "./var.js";
 import { addPreload, removePreload } from "./loader.js";
-import { addDisaabled, removeDisaabled } from "./util.js/disableElem.js";
-import { getData, postData } from "./util.js/api.js";
-import { renderElements } from "./util.js/renderElements.js";
+import { addDisaabled, removeDisaabled } from "./util/disableElem.js";
+import { getData, postData } from "./util/api.js";
+import { renderElements, renderElement } from "./util/renderElements.js";
 
 export const initReserve = () => {
   const reserveForm = document.querySelector(".reserve__form");
@@ -39,7 +39,6 @@ export const initReserve = () => {
       addPreload(fieldsetmonth);
 
       const data = await getData(`${API_URL}api?spec=${target.value}`);
-
       /*renderMonth(fieldsetmonth, data);*/
 
       renderElements("label", "radio", fieldsetmonth, data, "month");
@@ -107,15 +106,6 @@ export const initReserve = () => {
       fieldsettime,
       btn,
     ]);
-
-    const order = document.createElement("p");
-    order.textContent = `Спасибо за бронь #${res.id}. 
-    Ждем вас ${new Intl.DateTimeFormat("ru-RU", {
-      month: "long",
-      day: "numeric",
-    }).format(new Date(`${res.month}/${res.day}`))},
-        время: ${res.time}`;
-
-    reserveForm.append(order);
+    renderElement(reserveForm, "order", res);
   });
 };
